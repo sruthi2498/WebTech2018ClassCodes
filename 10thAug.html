@@ -1,0 +1,61 @@
+<script>
+// function Person(fname,lname,age){
+//     this.fname=fname;
+//     this.lname=lname;
+//     this.age=age;
+// }
+
+// Person.prototype.sayname=function(){
+//         console.log("Hi "+this.fname);
+// }
+// // Person.prototype.sayname=function(){
+// //         console.log("Hi "+this.fname);
+// // }
+// Person.prototype.sem=3;
+
+ //var person1= new Person("abc","xyz",23);
+// //person1.sem=5;
+// console.log(person1);
+
+// var person2= new Person("a","x",3);
+// console.log(person2);
+// var person2={fname:"a",lname:"b",age:2}
+// console.log(person2);
+// function sayGreeting(){
+//     console.log( arguments[0]+this.fname);
+// }
+// sayGreeting.call(person1,"SayHi ");
+
+//rectangele -> calculate are, overwrite tostring
+function Rectangle(len,breadth){
+	this.len=len;
+	this.breadth=breadth;
+}
+Rectangle.prototype.CalculateArea=function(){
+	return this.len*this.breadth;
+}
+
+Rectangle.prototype.toString=function(){
+	console.log("len "+this.len+" breadth"+this.breadth);
+}
+var rect=new Rectangle(2,3);
+console.log(rect.CalculateArea()); //6
+rect.toString();  //len 2 breadth3
+
+function Square(size){
+	Rectangle.call(this,size,size);
+	//this.len=size;
+	//this.breadth=size;
+}
+Square.prototype=new Rectangle(); 
+var sq=new Square(4);
+console.log(sq.CalculateArea()); //16
+sq.toString(); //len 4 breadth4
+
+Square.prototype.toString=function(){
+	console.log("side "+this.len);
+}
+sq.toString(); //side 4
+
+
+</script>

@@ -1,0 +1,35 @@
+<html>
+	<head>
+		<script>
+			function getDetails(){
+				console.log("get details");
+				var srn=document.getElementById("srn");
+				//get access to frame
+				var hfr=document.getElementById("hframe");
+				//for async commn : change src of hframe
+				hfr.src="http://localhost/class/11thAug.php?srn="+srn.value;
+			}
+
+			function showDetails(res){
+				var resArr=res.split(";")
+				var name=document.getElementById("name");
+				var cgpa=document.getElementById("cgpa");
+
+				srn.value=resArr[0];
+				name.value=resArr[1];
+				cgpa.value=resArr[2];
+
+			}
+		</script>
+	</head>
+	<body>
+		<form>
+			SRN <input type="text" name="srn" id="srn" onblur="getDetails()"/><br/>
+			NAME <input type="text" name="name" id="name" disabled/><br/>
+			CGPA <input type="text" name="cgpa" id="cgpa" disabled/><br/>
+			<input type="button" name="Save" onclick="submitForm()"/>
+
+			<iframe id="hframe" name="hframe" height="0" width="0"/>
+		</form>
+	</body>
+</html>

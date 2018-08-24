@@ -1,0 +1,38 @@
+<html>
+	<head>
+		<script>
+			function getDetails(){
+				//var srn=document.getElementById("srn");
+				var frm=document.getElementById("ipform");
+				frm.submit();
+			}
+
+			function showDetails(res){
+				var resArr=res.split(";")
+				var name=document.getElementById("name");
+				var cgpa=document.getElementById("cgpa");
+
+				srn.value=resArr[0];
+				name.value=resArr[1];
+				cgpa.value=resArr[2];
+
+			}
+			function submitForm(){
+				var frm=document.getElementById("ipform");
+				frm.action="11thAug_post_submit.php";
+				frm.target="_self";
+				frm.submit();
+			}
+		</script>
+	</head>
+	<body>
+		<form id="ipform" action="11thAug_post.php" method="POST" target="hframe">
+			SRN <input type="text" name="srn" id="srn" onblur="getDetails()"/><br/>
+			NAME <input type="text" name="name" id="name" disabled/><br/>
+			CGPA <input type="text" name="cgpa" id="cgpa" disabled/><br/>
+			<input type="button" value="Save" onclick="submitForm()"/>
+
+			<iframe id="hframe" name="hframe" height="0" width="0"/>
+		</form>
+	</body>
+</html>

@@ -1,0 +1,33 @@
+<html>
+	<head>
+		<script>	
+
+			var obj={
+				xhr:new XMLHttpRequest(),
+				getFile:function getFile(){
+					//XHR request
+					//here this refers to obj
+					//when xhr's readyState changes
+					this.xhr.onreadystatechange=this.showFile;
+					//onreadystatechange is invoked on this.xhr i.e obj's xhr
+					//so showFile is invoked with current object as obj.xhr
+					//showFIle will be called 4 times (1 for each change)
+					//open connection
+					this.xhr.open("GET","24thAug_XHR.txt",true);
+					//send
+					this.xhr.send();
+				},
+				showFile:function showFile(){
+					//in showfile current object is obj.xhr
+					if(this.readyState==4 && this.status==200){
+
+						console.log(this.responseText);
+					}
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<input type="button"  onclick="obj.getFile()" value="Fetch Async"/>
+ 	</body>
+</html>

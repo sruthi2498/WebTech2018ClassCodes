@@ -1,0 +1,24 @@
+<html>
+	<head>
+		<script>
+			<?php
+			extract($_GET);
+
+			if($srn=="SRN1"){
+				$ret="SRN1;abc;9.8";
+				echo("parent.showDetails('$ret')");
+			}
+			if($srn=="SRN2"){
+				$ret="SRN2;abcdddd;9.4";
+				echo("parent.showDetails('$ret')");
+			}
+			if($srn=="SRN3"){
+				$ret="SRN3;xyz;6.7";
+				echo("parent.showDetails('$ret')");
+			}
+			?>
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

@@ -1,0 +1,43 @@
+<html>
+	<head>
+		<script>
+			function success(){
+				console.log("Image loaded\n");
+				if(img.width==1){
+
+					document.getElementById("res").innerHTML="<p style='color:red'>Username not available</p>";
+				}
+				if(img.width==2){
+					document.getElementById("res").innerHTML="<p style='color:green'>Username available</p>";
+				}
+			}
+			function failure(){
+				console.log("failure");
+
+			}
+			function checkUname(){
+				console.log("checking username");
+				uname=document.getElementById("uname");
+				//creating image (global variable)
+				img=document.createElement("img");
+				img.id="image";
+				img.src="http://localhost/class/24thAug.php?uname="+uname.value;
+
+				img.onload=success; //if loaded successfully, call fn success
+				img.onerror=failure;
+			}
+
+			
+		</script>
+	</head>
+	<body>
+		<form>
+			Username <input type="text" name="uname" id="uname" onblur="checkUname()"/><br/>
+			<div id="res"></div><br/>
+			Password <input type="text" id="pwd" disabled/><br/>
+			Confirm password <input type="text" id="conf" onblur="checkPass()"disabled/><br/>
+
+			<input type="button" id="sub" value="SAVE"/>
+		</form>
+	</body>
+</html>
