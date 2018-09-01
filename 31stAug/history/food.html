@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+		</style>
+		<script>
+
+			count=0;
+			window.onpopstate=restore;
+			function restore(e){
+				var res=e.state;
+
+				document.getElementById("fname").value=res.fname;
+				document.getElementById("cs").value=res.cs;
+				document.getElementById("price").value=res.price;
+				document.getElementById("veg").value=res.veg;
+			}
+			var obj={
+				xhr:new XMLHttpRequest(),
+				getDetails:function(){
+					var fname=document.getElementById("fname").value;
+					this.xhr.onreadystatechange=this.showDetails;
+					this.xhr.open("GET","http://localhost/class/31stAug/history/food.php?fname="+fname,true);
+					this.xhr.send();
+				},
+				showDetails:function(){
+					if(this.readyState==4 && this.status==200){
+						var res=this.responseText;
+						var rj=JSON.parse(res);
+						document.getElementById("cs").value=rj.cs;
+						document.getElementById("price").value=rj.price;
+						document.getElementById("veg").value=rj.veg;
+
+						var hist=new Object();
+						//Store current details
+						hist["fname"]=document.getElementById("fname").value;
+						hist["cs"]=document.getElementById("cs
+							").value;
+							// OR hist["cs"] = rj.cs;
+						hist["price"]=document.getElementById("price").value;
+						hist["veg"]=document.getElementById("veg").value;
+							// OR hist["price"] = rj.price;
+						
+						window.history.pushState(hist,"History","http://localhost/class/31stAug/history/food.html?count="+count++);
+
+						
+					
+					}
+				
+				
+				}
+			
+			
+			}
+		
+		</script>
+	</head>
+	<body>
+		Food<input type="text" name="fname" id="fname" onblur="obj.getDetails()"/><br/>
+		Cuisine<input type="text" name="cs" id="cs" /><br/>
+		Price<input type="text" name="price" id="price" /><br/>
+		Veg<input type="text" name="veg" id="veg" /><br/>
+
+	</body>
+</html>

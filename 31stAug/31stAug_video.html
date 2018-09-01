@@ -1,0 +1,31 @@
+<html>
+	<head>
+		<script>
+			var obj={
+				xhr:new XMLHttpRequest(),
+				getVideo: function(){
+					this.xhr.onreadystatechange=this.showVideo;
+					this.xhr.responseType="blob";
+					this.xhr.open("GET","http://localhost/class/31stAug/31stAug_video.php",true);
+					this.xhr.send();
+				},
+				showVideo:function(){
+					if(this.readyState==4 && this.status==200){
+						var res=this.response; //binary data
+
+						var vid=document.createElement("video");
+						vid.controls=true;
+						vid.autoplay=true;
+						vid.src=window.URL.createObjectURL(res);
+						document.body.appendChild(vid);
+
+					}
+				}
+
+			}
+		</script>
+	</head>
+	<body>
+		<button onclick="obj.getVideo()" value="Watch tvari" label="Watch tvari">
+	</body>
+</html>

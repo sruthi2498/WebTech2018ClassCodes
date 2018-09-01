@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Multi Stage Download</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" >
+<link rel="stylesheet" type="text/css" href="styles.css" >
+<script>
+var xhr=new XMLHttpRequest();
+function init(){
+  xhr.onreadystatechange=showContent;
+  xhr.open("GET","content.txt",true);
+  xhr.send();
+}
+	
+function showContent(){
+  if(xhr.readyState==4 && xhr.status==200){
+      var res=xhr.responseText;
+      var resArr=res.split(";");
+      document.getElementById("secondary").innerHTML=resArr[0];
+      document.getElementById("header").innerHTML=resArr[1];
+
+      //Loading icon
+      document.getElementById("picture").innerHTML=resArr[3];
+      document.getElementById("links").innerHTML=resArr[3];
+      document.getElementById("audio").innerHTML=resArr[3];
+
+      setTimeout(getPic,4000); //if user stays for 4 secs then load the things
+
+
+
+  }
+}
+
+function getPic(){
+  this.xhr.onreadystatechange=this.showPic;
+
+  //using GET
+  this.xhr.open("GET","img.txt",true);
+  this.xhr.send();
+}
+
+function showPic(){
+  if(xhr.readyState==4 && xhr.status==200){
+    var res=this.responseText;
+    document.getElementById("picture").innerHTML=res;
+  }
+}
+</script>
+</head >
+<body onload="init()">
+<div id="doc" class="yui-t7">
+  <div id="hd">
+    <div id="header"><h1>Multi Stage</h1><div id="logo"></div></div>
+  </div>
+  <div id="bd">
+    <div id="yui-main">
+      <div class="yui-b">
+        <div class="yui-gb">
+          <div class="yui-u first">
+		  <div class="content" id="picture">Picture</div>
+            
+          </div>
+          <div class="yui-u">
+            <div class="content" id="links">Links</div>
+          </div>
+          <div class="yui-u">
+            <div class="content" id="audio">Audio</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="yui-b">
+      <div id="secondary">Text Content</div>
+    </div>
+  </div>
+  <div id="ft">
+    <div id="footer">Footer</div>
+  </div>
+</div>
+</body>
+</html>
