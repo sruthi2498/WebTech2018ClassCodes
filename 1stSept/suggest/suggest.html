@@ -1,0 +1,51 @@
+<html>
+	<head>
+		<style>
+		#container{
+		border:solid 1px black;
+		display:none
+		}
+		.fooditem{
+		
+			background-color:grey;
+			color:black;	
+		}
+		.fooditem:hover{
+		
+			background-color:white;
+		}
+		
+		</style>
+		<script>
+			function Suggest(){
+
+				this.timer=null;
+				var temp=this;
+				this.getTerm=function(){
+					if(this.timer){
+						clearTimeout(this.timer);
+					}
+					this.timer=setTimeout(this.sendSearch,1000);
+				},
+
+				this.sendSearch=function(){
+					//here this = window
+					//console.log(this) -> window Object
+					val=document.getElementById("search").value;
+					console.log(val);
+					//console.log(temp) ->instance of suggest object
+
+				}
+			}
+			var obj=new Suggest();
+		</script>
+	</head>
+	<body>
+		<table border="0" cellpadding="0">
+		<tr><td>Name</td><td><input type="text" id="person" /></td></tr>
+		<tr><td>Food</td><td><input type="text" id="search" onkeypress="obj.getTerm()"/></td></tr>
+		<tr><td></td><td><div id="container"></td></div></tr>
+		</table>
+	</body>
+
+</html>
