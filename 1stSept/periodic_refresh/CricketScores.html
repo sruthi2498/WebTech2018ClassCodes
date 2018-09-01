@@ -10,15 +10,18 @@
 		</style>
 		<script>
 		var xhr=new XMLHttpRequest();
+		var request_interval=2000;
 		function getScore(){
 			xhr.onreadystatechange=showScore;
+			xhr.timeout=6000;
+			xhr.ontimeout=backoff;
 			xhr.open("GET","scores.php",true);
 			xhr.send();
 		}
 		function showScore(){
 
 			if(xhr.readyState==4 && xhr.status==200){
-
+				request_interval=2000; //reset request interval when it works
 				var res=xhr.responseText;
 				scores=res.split(";")
 				document.getElementById("team1").innerHTML=scores[0];
@@ -27,8 +30,15 @@
 
 				document.getElementById("status").textContent+=" ...";
 
-				setTimeout(getScore,2000);
+				setTimeout(getScore,request_interval);
 			}
+		}
+
+		function backoff(){
+			console.log("request timeout"); 
+			request_interval=request_interval*2; //increase request interval
+			console.log(request_interval);
+			setTimeout(getScore,request_interval); //call getScore again
 		}
 
 		</script>
