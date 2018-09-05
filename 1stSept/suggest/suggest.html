@@ -20,8 +20,12 @@
 			function Suggest(){
 
 				this.timer=null;
+				this.xhr=new XMLHttpRequest();
+				this.search=null; 
+				this.container=null;
 				var temp=this;
 				this.getTerm=function(){
+					console.log("getTerm");
 					if(this.timer){
 						clearTimeout(this.timer);
 					}
@@ -29,12 +33,80 @@
 				},
 
 				this.sendSearch=function(){
+					//console.log("sendSearch");
 					//here this = window
 					//console.log(this) -> window Object
-					val=document.getElementById("search").value;
-					console.log(val);
+					//val=document.getElementById("search").value;
+					//console.log(val);
 					//console.log(temp) ->instance of suggest object
 
+					temp.search=document.getElementById("search");
+					temp.container=document.getElementById("container");
+					temp.xhr.onreadystatechange=temp.showResult;
+
+					//first check if it is already there in local storage
+					if(localStorage.getItem("suggest.php?term="+temp.search.value)){
+						console.log("from cache");
+						var cacheRes=localStorage.getItem("suggest.php?term="+temp.search.value)
+						var resO=JSON.parse(cacheRes);
+
+						temp.search.style.backgroundColor="white";
+						temp.container=document.getElementById("container");
+						for(f in resO){
+								temp.search.style.backgroundClor="white";
+								itemDiv=document.createElement("div");
+								itemDiv.innerHTML=resO[f];
+								itemDiv.className="foodItem";
+								temp.container.appendChild(itemDiv);
+								
+								itemDiv.onclick=temp.sendFood;
+						}
+						temp.container.style.display="block";
+
+					}
+					else{
+					
+						
+						temp.xhr.open("GET","suggest.php?term="+temp.search.value,true);
+						temp.xhr.send();
+
+					console.log(document.getElementById("search").value);
+
+					}
+
+
+
+				}
+				this.showResult=function(){
+					console.log("showResult");
+
+					if(this.readyState==4 && this.status==200){
+						res=this.responseText;
+
+						localStorage.setItem("suggest.php?term="+temp.search.value,res);						
+						resO=JSON.parse(res);
+						console.log("response "+resO);
+						if(resO.length==0){
+							temp.search.style.backgroundColor="red";
+							temp.container.style.display="none";
+						}
+						else{
+							temp.search.style.backgroundColor="white";
+							temp.container=document.getElementById("container");
+							for(f in resO){
+								temp.search.style.backgroundClor="white";
+								itemDiv=document.createElement("div");
+								itemDiv.innerHTML=resO[f];
+								itemDiv.className="foodItem";
+								temp.container.appendChild(itemDiv);
+								
+								itemDiv.onclick=temp.sendFood;
+							}
+							temp.container.style.display="block";
+						}
+						
+						
+					}
 				}
 			}
 			var obj=new Suggest();
