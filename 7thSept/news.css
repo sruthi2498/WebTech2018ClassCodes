@@ -1,0 +1,15 @@
+div#outer
+{
+	border-top:2px solid red;
+	border-bottom:2px solid red;
+	border-left:transparent;
+	border-right:transparent;
+	height:25px;
+	white-space:nowrap;
+}
+
+div#inner
+{
+	
+	position:absolute;
+}

@@ -7,10 +7,11 @@
 				//get access to frame
 				var hfr=document.getElementById("hframe");
 				//for async commn : change src of hframe
-				hfr.src="http://localhost/class/11thAug.php?srn="+srn.value;
+				hfr.src="http://localhost/class/11thAug/11thAug.php?srn="+srn.value;
 			}
 
 			function showDetails(res){
+				console.log("show details"+this);
 				var resArr=res.split(";")
 				var name=document.getElementById("name");
 				var cgpa=document.getElementById("cgpa");
