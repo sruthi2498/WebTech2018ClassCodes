@@ -5,12 +5,16 @@
 			var obj={
 				xhr: new XMLHttpRequest(),
 				getDetails:function(){
-					//when readyState changes, call fn showFile
-					this.xhr.onreadystatechange=this.showFile;
+					
 
 					var fname=document.getElementById("fname").value;
-					this.xhr.open("PUT","http://localhost/class/29thAug/29thAug_xhr.php?fname="+fname,true);
+					//when readyState changes, call fn showFile
+					this.xhr.onreadystatechange=this.showFile;
+					
+
+					this.xhr.open("PUT","http://localhost/class/29thAug/29thAug_xhr_complexRequests.php?fname="+fname,true);
 					this.xhr.send();
+
 				},
 				showFile:function showFile(){
 					//in showfile current object is obj.xhr
