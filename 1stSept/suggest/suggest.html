@@ -66,14 +66,14 @@
 					}
 					else{
 					
-						
+						console.log("not present in cache");
 						temp.xhr.open("GET","suggest.php?term="+temp.search.value,true);
 						temp.xhr.send();
 
-					console.log(document.getElementById("search").value);
+					
 
 					}
-
+					console.log(document.getElementById("search").value);
 
 
 				}
@@ -107,6 +107,12 @@
 						
 						
 					}
+				}
+				this.sendFood=function(e){
+					value_clicked_on=e.target.firstChild.nodeValue;
+					//replace search box with this value
+					temp.search.value=value_clicked_on;
+
 				}
 			}
 			var obj=new Suggest();
