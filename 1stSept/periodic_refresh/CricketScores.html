@@ -12,6 +12,7 @@
 		var xhr=new XMLHttpRequest();
 		var request_interval=2000;
 		function getScore(){
+			console.log("getScore");
 			xhr.onreadystatechange=showScore;
 			xhr.timeout=6000;
 			xhr.ontimeout=backoff;

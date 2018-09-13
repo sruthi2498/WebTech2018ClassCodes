@@ -1,0 +1,51 @@
+<html>
+	<script>
+		function test(){
+
+		}
+		console.log(test);
+			//test()
+				// arguments: null
+				// caller: null
+				// length: 0
+				// name: "test"
+				// prototype: Object { … }
+				// <prototype>: function ()
+		console.log(test.prototype); //Object { … }
+		var a ={};
+		console.log(a);
+			// Object {
+				//<prototype>: {
+					//constructor: function Object()
+					// .......
+				//}
+			//}
+		console.log(typeof a); //object
+		console.log(Object.getPrototypeOf(a)); //Object { … }
+		console.log(a.constructor.prototype); //Object { … }
+
+
+		function A(name) {
+			this.name = name;
+		}
+		var a = new A('alpha');
+		A.prototype.val1=2;
+		console.log(a);
+		//name: "alpha"
+		//	<prototype>: {…}
+		//		constructor: function A()
+		//		val1: 2
+		A.prototype={x:1};
+		console.log(a); 
+		//a.__proto__ still references the original object
+		//name: "alpha"
+		//	<prototype>: {…}
+		//		constructor: function A()
+		//		val1: 2
+
+
+
+	</script>
+	<body>
+	</body>
+</html>

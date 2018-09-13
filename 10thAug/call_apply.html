@@ -1,0 +1,49 @@
+<html>
+	<script>
+		function Person(name){
+			this.name=name;
+		}
+
+		var person1=new Person("a");
+		var person2=new Person("b");
+		console.log(person1);
+		var Hello=function(){
+			console.log(this);
+			console.log("hello "+this.name);
+		}
+		Hello(); // this=Window, o/p=hello 
+		Hello(person1); // this=Window, o/p=hello 
+		Hello.call(person1); //this=Object { name: "a" } o/p=hello a
+
+		var Hello2=function(x){
+			console.log("hello "+this.name+" x= "+x);
+		}
+		Hello2(); // hello  x= undefined
+		Hello2(person1); // hello  x= [object Object]
+		Hello2.call(person1); //hello a x= undefined
+		Hello2.call(person1,"4"); //hello a x= 4
+
+
+		var Hello3=function(){
+			console.log("hello "+arguments[0]);
+		}
+		Hello3(); //hello undefined
+		Hello3(person1); //hello [object Object]
+		Hello3.apply(person1); //hello undefined
+		Hello3.apply(person1,["abc"]); //hello abc
+
+		var Hello4=function(){
+			console.log("hello "+this.name);
+		}
+		console.log("-------------");
+		Hello4(); //hello 
+		Hello4(person1); //hello 
+		Hello4.apply(person1); //hello a
+		Hello4.apply(person1,["abc"]); //hello a
+		Hello4.apply(person1,[person1]); //hello a
+
+
+	</script>
+	<body>
+	</body>
+</html>

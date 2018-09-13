@@ -1,0 +1,15 @@
+<html>
+<body>
+	<div id="display">
+	</div>
+	<button onclick="load()">Press to load</button>
+	<script>
+		function load()
+		{
+			s = document.createElement('script');
+			s.src = "script.php";
+			document.body.append(s);
+		}
+	</script>
+</body>
+</html>

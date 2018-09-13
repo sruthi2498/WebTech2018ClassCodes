@@ -28,6 +28,7 @@
 
 //rectangele -> calculate are, overwrite tostring
 function Rectangle(len,breadth){
+	console.log("rect..")
 	this.len=len;
 	this.breadth=breadth;
 }
@@ -38,16 +39,21 @@ Rectangle.prototype.CalculateArea=function(){
 Rectangle.prototype.toString=function(){
 	console.log("len "+this.len+" breadth"+this.breadth);
 }
-var rect=new Rectangle(2,3);
-console.log(rect.CalculateArea()); //6
-rect.toString();  //len 2 breadth3
+// var rect=new Rectangle(2,3);
+// console.log(rect.CalculateArea()); //6
+// rect.toString();  //len 2 breadth3
 
 function Square(size){
-	Rectangle.call(this,size,size);
-	//this.len=size;
-	//this.breadth=size;
+	console.log("square..")
+	//Rectangle.call(this,size,size);
+	this.len=size;
+	this.breadth=size;
 }
-Square.prototype=new Rectangle(); 
+Square.prototype=Rectangle.prototype;
+console.log(Square);
+// Square.prototype=new Rectangle(); 
+// Square.prototype.constructor=Square;
+
 var sq=new Square(4);
 console.log(sq.CalculateArea()); //16
 sq.toString(); //len 4 breadth4
@@ -56,6 +62,7 @@ Square.prototype.toString=function(){
 	console.log("side "+this.len);
 }
 sq.toString(); //side 4
-
+console.log(Square);
+console.log(Rectangle);
 
 </script>
