@@ -1,0 +1,39 @@
+<html>
+	<head>
+		<script>
+			var t=0;
+			var obj={
+				xhr: new XMLHttpRequest(),
+				getData : function(){
+					this.xhr.onreadystatechange=this.showData;
+					this.xhr.open('GET', 'polling.php?t='+t,true);
+					this.xhr.send();
+				},
+				showData:function(){
+					if(this.readyState == 4 && this.status == 200){ 
+
+						var res=this.responseText;
+						if(res.indexOf('Fatal')==-1){ // NOT FATAL
+
+							var resArr=res.split(";");
+							t=resArr[1];
+							document.getElementById("time").innerHTML=resArr[1];
+							document.getElementById("content").innerHTML=resArr[0];
+
+							obj.getData(t);
+						}
+						else{
+							obj.getData(t);
+						}
+
+					}
+				}
+			}
+			
+		</script>
+	</head>
+	<body onload="obj.getData()">
+		<div id="content"></div>
+		<div id="time"></div>
+	</body>
+</html>

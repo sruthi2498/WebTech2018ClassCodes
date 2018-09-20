@@ -1,0 +1,32 @@
+<html>
+	<head>
+		<script>
+			var t=0;
+			var obj={
+				xhr: new XMLHttpRequest(),
+				getData : function(){
+					this.xhr.onreadystatechange=this.showData;
+					this.xhr.open('GET', 'streaming.php?t='+t,true);
+					this.xhr.send();
+				},
+				showData:function(){
+					console.log("readyState "+this.readyState);
+					console.log("status "+this.status);
+					
+					if(this.readyState == 3 && this.status == 200){ 
+						console.log("responseText : ",this.responseText);
+						var div=document.createElement("div");
+						div.innerHTML=this.responseText;
+						document.body.appendChild(div);
+
+					}
+
+				}
+			}
+			
+		</script>
+	</head>
+	<body onload="obj.getData()">
+		
+	</body>
+</html>
