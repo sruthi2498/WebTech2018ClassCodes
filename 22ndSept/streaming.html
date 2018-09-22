@@ -4,7 +4,7 @@
 			var t=0;
 			var obj={
 				xhr: new XMLHttpRequest(),
-				getData : function(){
+				monitor : function(){
 					this.xhr.onreadystatechange=this.showData;
 					this.xhr.open('GET', 'streaming.php?t='+t,true);
 					this.xhr.send();
@@ -14,11 +14,17 @@
 					console.log("status "+this.status);
 					
 					if(this.readyState == 3 && this.status == 200){ 
-						console.log("responseText : ",this.responseText);
+
+						var res=this.responseText;
+
+						console.log("responseText : ",res);
 						var div=document.createElement("div");
-						div.innerHTML=this.responseText;
+						div.innerHTML=res;
 						document.body.appendChild(div);
 
+					}
+					else if(this.readyState == 4 && this.status == 200){
+						obj.monitor();
 					}
 
 				}
@@ -26,7 +32,7 @@
 			
 		</script>
 	</head>
-	<body onload="obj.getData()">
+	<body onload="obj.monitor()">
 		
 	</body>
 </html>
