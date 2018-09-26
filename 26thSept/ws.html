@@ -1,0 +1,28 @@
+<html>
+	<head>
+		<script>
+			function wsocket(){
+				websocket=new WebSocket("ws://localhost:12345/class/26thSept/ws.php")
+				websocket.onopen=function(ev){
+					alert("Connected");
+				}
+				websocket.onerror=function(ev){
+					alert("error");
+				}
+				websocket.onclose=function(ev){
+					alert("closed");
+				}
+				websocket.onmessage=function(ev){
+					console.log(ev.data);
+				}
+			}
+			function sendMessage(){
+				var msg=document.getElementById("msg").value;
+				websocket.send(msg);
+			}
+		</script>
+	</head>
+	<body onload="wsocket()">
+		<input type="text" id="msg" onblur="sendMessage()"/>
+	</body>
+</html>
