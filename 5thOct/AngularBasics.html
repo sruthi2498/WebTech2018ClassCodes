@@ -1,0 +1,28 @@
+<html ng-app="NotesApp">
+	<body ng-controller="MainCtrl as ctrl">
+		<h1> Hello {{1+2}}</h1>
+		<input type="text" ng-model="name"/>
+		Hello you typed {{name}}
+
+
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.js"></script>
+		<script>
+			angular.module("NotesApp",[]).controller("MainCtrl",[function(){
+					console.log("Main has loaded");
+					var self=this;
+					self.hello="Hello";
+					self.bye="Bye";
+					self.changeMsg=function(){
+						self.msg="bye";
+					}
+				}])
+		</script>
+
+		<h1> {{ctrl.hello}}  Angular</h1>
+		<h1> {{ctrl.bye}}  Angular</h1>
+
+		<h1> {{ctrl.msg}} Angular </h1>
+		<input type="button" ng-click="ctrl.changeMsg()"/> 
+	</body>
+
+</html>

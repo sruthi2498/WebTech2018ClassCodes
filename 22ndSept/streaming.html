@@ -23,7 +23,7 @@
 						document.body.appendChild(div);
 
 					}
-					else if(this.readyState == 4 && this.status == 200){
+					if(this.readyState == 4 && this.status == 200){
 						obj.monitor();
 					}
 

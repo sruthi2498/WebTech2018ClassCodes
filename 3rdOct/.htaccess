@@ -1,0 +1,6 @@
+Options -Indexes
+DirectoryIndex home.html
+
+RewriteEngine On
+RewriteRule ^student/read/([0-9]{3}) service.php?srn=$1
+RewriteRule ^student/update service.php
