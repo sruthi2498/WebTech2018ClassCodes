@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html ng-app="notesApp">
+<head>
+	<style>
+		.assignee{border: 1px solid black;}
+		.done{background-color:green}
+		.pending{background-color:red}
+	</style>
+
+</head>
+<body ng-controller="MainCtrl as ctrl">
+<form name="MyForm" ng-submit="ctrl.submit()">
+	<input type="text" name="uname" ng-model="ctrl.user.uname" required ng-minlength=4 />
+	<span ng-show="MyForm.uname.$error.minlength"> Mininum four characters </span>
+	<input type="radio" name="gender" value="male" ng-model="ctrl.user.gender">Male
+	<input type="radio" name="gender" value="female" ng-model="ctrl.user.gender">Female
+	<input type="submit" ng-disabled="MyForm.$invalid"/>
+</form>	
+</div>
+
+<script
+src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.js">
+</script>
+<script>
+angular.module("notesApp",[]).controller("MainCtrl",["$http",
+	function($http){
+		var self = this
+		self.submit = function(){
+			$http.post("httppost.php", self.user).then(
+				function(response){
+					console.log(response);
+				},
+				function(err){
+					alert(err);
+				}
+				)
+
+		}
+	
+}])
+
+</script>
+</body>
+</html>

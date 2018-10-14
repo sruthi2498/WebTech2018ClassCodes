@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app="notesApp">
+<head>
+	<style>
+		
+	</style>
+
+</head>
+<body ng-controller="MainCtrl as ctrl">
+
+<div ng-repeat="(task, note) in ctrl.notes">
+	<span>{{task}}</span>
+	<span>{{note}}</span>
+</div>
+
+<script
+src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.js">
+</script>
+<script>
+
+	angular.module("notesApp",[]).controller("MainCtrl",["$http", 
+		function($http){
+			var self=this;
+			self.notes={}
+			// then -> promise that the fn will return something
+			//$http.get("httpget.php").then(function(response){}, function (err){} );
+			$http.get("httpget.php").then(function(response){
+			self.notes= response.data;
+			console.log(response);
+		}, function (err){
+			alert(err);
+
+		})
+		
+		
+	}])
+
+</script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html ng-app="notesApp">
+	<head>
+	<style>
+		
+	</style>
+	</head>
+	<body ng-controller="MainCtrl as ctrl">
+		<div ng-repeat="(author,note) in ctrl.notes">
+			<!-- Can access objects as key value pairs. Here author=VR, value= {no:1,task:.....} Values can be objects-->
+			<span> {{author}} </span>
+			<span> {{note.task}} </span>
+		</div>
+		
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.js">
+	</script>
+	<script>
+		angular.module("notesApp",[]).controller("MainCtrl",[function(){
+		
+			var self=this
+			self.notes={
+				
+			VR:{no:1,task:"task1",done:true,assignee:"vr"},
+			SRS:{no:2,task:"task2",done:false},
+			dK:{no:3,task:"task3",done:true},
+			
+			}
+			
+			}
+			
+		]);
+	</script>	
+	</body>
+</html>  

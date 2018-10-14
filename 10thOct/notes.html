@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html ng-app="notesApp">
+	<head>
+	<style>
+		.done{
+		   color:green;
+		
+		}  
+		.pending{
+		   color:red;
+		
+		}
+		.ag{
+			border:1px solid black;
+		}
+	
+	</style>
+	</head>
+	<body ng-controller="MainCtrl as ctrl"> 
+    <div ng-repeat="note in ctrl.notes" ng-class="ctrl.getClass(note.done)">
+    	<!-- ng-class getCLass - returns done/pending based on status 
+    		And done = color green, pending =color red in CSS
+    		Therefore changed css of div using ng-class -->
+    <span>{{note.task}}</span>
+    <span>{{note.done}}</span>
+    <span class="ag" ng-show="note.assignee" ng-bind="note.assignee"></span>
+    <!-- only first one had assignee, therefore ng-show -> True & value was printed -->
+    <span> {{$first}} </span>
+    <!-- $first = true if elem is first in iterator -->
+    </div>
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.js">
+	</script>
+	<script>
+	//TODO: ng-repeat,ng-show,ng-class,helper variables
+		angular.module("notesApp",[]).controller("MainCtrl",[function(){
+		
+			var self=this
+			self.notes=[
+			{no:1,task:"task1",done:true,assignee:"vr"},
+			{no:2,task:"task2",done:false},
+			{no:3,task:"task3",done:true},
+			]	
+						
+			self.getClass = function(status){
+		        if(status){
+		            return "done";
+		        }
+		        else
+		            return "pending";
+		    }
+
+	
+			
+		}]);
+	</script>	
+	</body>
+</html>  
