@@ -17,13 +17,21 @@
 
 						var res=this.responseText;
 
+						if(res.indexOf("Fatal")== -1){// NOT FATAL
 						console.log("responseText : ",res);
 						var div=document.createElement("div");
 						div.innerHTML=res;
 						document.body.appendChild(div);
+						}
+						else{
+							obj.monitor();
+						}
+
+
 
 					}
 					if(this.readyState == 4 && this.status == 200){
+						this.abort();
 						obj.monitor();
 					}
 
