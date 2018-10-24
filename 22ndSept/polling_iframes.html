@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script type="text/javascript">
+		timer = null;
+		obj =
+		{
+			monitor: function()
+			{
+				console.log("monitor...");
+				iframe =document.getElementById("hframe");
+				
+				//Make a LONG POLL to the server.
+				iframe.src = "http://localhost/class/22ndSept/polling_iframes.php";
+
+			},
+			
+			updateDiv: function(str)
+			{
+				console.log("response!");
+				newdiv = document.createElement("div");
+				newdiv.innerHTML = str;
+				
+				document.body.appendChild(newdiv);
+				
+				//Clear the timer for now
+				obj.heartbeat();
+			},
+			
+			//The heartbeat function. This is fired by the server
+			// on every iteration. Each time we fire this function,
+			//we will postpone the next connection by 10 seconds.
+			// If the server closes, the heartbeat is not received
+			// and we will reconnect in 10 seconds.
+			heartbeat: function()
+			{
+				newdiv = document.createElement("div");
+				newdiv.innerHTML = "heartbeat...";
+				document.body.appendChild(newdiv);
+				if(timer)
+				{
+					clearTimeout(timer);
+				}
+				
+				timer = setTimeout(obj.monitor,10000);
+			
+			}
+		}
+		</script>
+	</head>
+	<body>
+		<input type="button" value="CLICK TO MONITOR" onclick="obj.monitor()"/>
+
+			<iframe id="hframe" name="hframe" height="0" width="0"/>
+		
+	</body>
+</html>
