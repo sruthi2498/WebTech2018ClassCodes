@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app="">
+	<body> 
+
+		
+		<div class="container" ng-controller="SimpleController">
+
+		<ul>
+			<li ng-repeat="c in customers">
+				{{c.name}}-{{c.city}}
+			</li>
+		</ul>
+		</div>
+
+	
+	<script>
+		function SimpleController($scope){
+			$scope.customers=[
+			{name:"A",city:"B"},
+			{name:"C",city:"D"}
+			];
+		}
+	</script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.js">
+	</script>
+
+		
+	</body>
+</html>  
