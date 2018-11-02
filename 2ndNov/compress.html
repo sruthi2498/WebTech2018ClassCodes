@@ -1,0 +1,24 @@
+<html>
+	<head>
+		<script type="text/javascript">
+			function getFile(){
+				xhr=new XMLHttpRequest();
+				xhr.onreadystatechange=show;
+				xhr.open("GET","compress.php",true);
+				xhr.send();
+			}
+			function show(){
+				if(xhr.readyState==4 && xhr.status==200){
+					var div=document.createElement("div");
+					div.innerHTML=xhr.responseText;
+					document.body.appendChild(div);
+				}
+			}
+
+		</script>
+
+	</head>
+	<body>
+		<input type="button" value="Compress" onclick="getFile()"/>
+	</body>
+</html>
