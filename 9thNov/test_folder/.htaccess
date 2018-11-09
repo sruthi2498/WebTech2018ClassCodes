@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName pro
+AuthUserFile "/opt/lampp/htdocs/class/9thNov/test_folder/pswdfile"
+Require valid-user

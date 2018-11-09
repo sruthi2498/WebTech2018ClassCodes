@@ -1,0 +1,44 @@
+<html>
+	<head>
+		<script>
+			var obj={
+				makeCall:function(){
+					var un=document.createElement("input");
+					un.type="text";
+					un.placeholder="Username";
+					un.id="un";
+					var pw=document.createElement("input");
+					pw.type="password";
+					pw.placeholder="Password";
+					pw.id="pw";
+					document.body.appendChild(un);
+					document.body.appendChild(pw);
+					pw.onblur=obj.sendCall;
+
+				},
+				sendCall:function(){
+					var user=document.getElementById("un").value;
+					var pswd=document.getElementById("pw").value;
+					console.log(user,pswd);
+					var serstr=user+":"+pswd;
+					var encstr=btoa(serstr);
+					xhr=new XMLHttpRequest();
+					xhr.open("GET","test_folder/data.txt",true);
+					xhr.onreadystatechange=obj.show;
+					xhr.setRequestHeader("Authentication","BASIC "+encstr);
+					xhr.send();
+				},
+				show:function(){
+					if(xhr.readyState==4 && xhr.status==200){
+						var div=document.createElement("div");
+						div.innerHTML=xhr.responseText;
+						document.body.appendChild(div);
+					}
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<input type="button" value="Send Request" onclick="obj.makeCall()">
+	</body>
+</html>
