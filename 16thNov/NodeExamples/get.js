@@ -1,3 +1,5 @@
+var util = require('util');
+
 function initGET(req, pre, cb) {
 	pre._GET = {};
 	var urlparts = req.url.split('?');
@@ -9,4 +11,26 @@ function initGET(req, pre, cb) {
 		}
 	}
 	cb();
+}
+
+//To output html to browser
+function page(req, res, pre, cb) {
+	console.log(pre._GET);
+	res.writeHead(200, {'Content-Type': 'text/html'});
+	
+	for(i in pre._GET)
+	{
+		res.write("<h3>" + i + "=>" + pre._GET[i] + "</h3>");
+	}
+	
+	res.end('get.js\n'+util.inspect(pre));
+}
+
+exports.serve = function(req,res)
+{
+	var pre = {};
+	initGET(req, pre, function() {
+			page(req, res, pre, function() {
+		});
+	});
 }

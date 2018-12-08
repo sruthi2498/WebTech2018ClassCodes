@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script type="text/javascript">
+	    setCookie = function(){
+	        document.cookie = "myCookie=red";
+	        document.getElementById("form").submit();       
+	    }
+	</script>
+</head>
+<body>
+	<form method="GET" action="http://localhost:1234/cookie.php" id="form">
+		<input type="text" name="name"/><p>
+		<input type="text" name="usn"/><p>
+		<input type="button" value="Submit" onclick="setCookie();" />
+	</form>
+</body>
+</html>
