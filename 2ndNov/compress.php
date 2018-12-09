@@ -3,10 +3,19 @@
 	$filename="data.txt";
 	$f=fopen($filename,"r");
 	$data=fread($f,filesize($filename));
-	$compressed=gzencode($data,9);
-	//echo $compressed;
-	//var_dump($_SERVER);
+	
 
 	$enocding=$_SERVER["HTTP_ACCEPT_ENCODING"];
-	echo $enocding;
+	if(strpos($enocding,"gzip")!==false){
+		
+		$compressed=gzencode($data,9);
+		echo $compressed;
+	}
+	else if(strpos( $enocding,"deflate")!==false){
+		$compressed=gzdeflate($data);
+		echo $compressed;
+	}
+	else{
+		echo "NO encoding";
+	}
 ?>
